@@ -259,6 +259,7 @@ export default {
       let posX = 0;
       let posY = 0;
       let posZoneChange = 0;
+      let arrZoneChange = []
       let arrClosest = [];
 
       console.log("getzone");
@@ -275,7 +276,13 @@ export default {
           data.forEach(doc => {
             let size = data.size;
             let currentDataSize = 0;
-            // console.log(data.size)
+
+            arrZoneChange.push(doc.id)
+            if(arrZoneChange.length > currentDataSize){
+              posZoneChange += 2;
+            }currentDataSize=arrZoneChange
+         
+            console.log('data',arrZoneChange)
             db.collection("floors")
               .doc(this.$store.state.floor.toString())
               .collection("zoneDetail")
@@ -318,7 +325,7 @@ export default {
                   let bestSlot = true;
                   let closest = true;
 
-                  pos = [posX, posY]; //'['+posX+','+ posY+']';
+                  pos ='['+posX+','+ posY+']';
                   posY++; //"[" + posX + "," + posY++ + "]";
                   marticSlot.push([doc.id, pos]);
 
@@ -446,9 +453,9 @@ export default {
                 console.log(this.all_zones);
                 /** */
 
-                if (this.all_zones.size > countZone) {
+                if (this.all_zones.size >= countZone) {
                   //marticSlot.push(countZone);
-                  posZoneChange += 2;
+                  
                   posX = 0;
                 }
                 countZone = this.all_zones.size;
