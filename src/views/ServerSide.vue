@@ -231,10 +231,10 @@ export default {
     getZoneWithSlot() {
       let marticSlot = [];
       let countZone = 0;
-      let pos;
-      let posX = 0;
+    
+    
       let postiX = 0;
-      let posY = 0;
+    
       let positY = 0;
       let posZoneChange = 0;
       //let arrAllZone = new Map();
@@ -333,6 +333,16 @@ export default {
                   foundStatus = Object.keys(this.slotStatus).find(
                     slot => slot == doc.id //&& Object.values(this.slotStatus) === true
                   );
+
+                  /** 
+                       const inventory = [
+                        {name: 'apples', quantity: 2},
+                        {name: 'bananas', quantity: 0},
+                        {name: 'cherries', quantity: 5},
+                        {name: 'melon', quantity: 0},
+                      ];
+                      const result = inventory.filter( ({ quantity }) => quantity === 0 );
+                  */
                   /**found best slot */
                   foundBest = Object.keys(this.bestStatus).find(
                     slot => slot == doc.id
@@ -365,8 +375,8 @@ export default {
                   //   return a - b;
                   // });
                   console.log([...this.allSlot]);
-                  //this.$store.commit("showRecommendSlot", stateBestArr);
-                  //console.log("stateBestArr", stateBestArr);
+                 
+                  console.log("stateBestArr", stateBestArr);
                   // let a = ['1A-00','2A-00']
                   //this.$store.commit("recommendSlot", a); //stateBestArr
 
@@ -390,8 +400,7 @@ export default {
                   //arrClosest.forEach((element)=>console.log('testForEach',element[0],'X=', element[1][0],'Y=', element[1][1]))
                   //console.log("arrClosest", arrClosest[i][0]);
                   if (arrayzone.length === 2) {
-                    posX++;
-                    posY = posZoneChange;
+                
                     arrayChunked.push(arrayzone);
                     arrayzone = [];
                   }
@@ -404,8 +413,7 @@ export default {
                 /** */
                 if (this.all_zones.size > countZone) {
                   //marticSlot.push(countZone);
-                  posZoneChange += 2;
-                  posX = 0;
+              
                 }
                 countZone = this.all_zones.size;
                 // console.log("marticSlot", this.all_zones.size, marticSlot);
@@ -415,8 +423,11 @@ export default {
                   this.isShow = true;
                   console.log("All_Zone", this.all_zones);
                 }
+                // --->> this.$store.commit("showRecommendSlot", stateBestArr);
               });
+             
           });
+           
         });
 
     },

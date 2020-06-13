@@ -2,13 +2,13 @@
   <div class="containner">
     <div class="center">
       <h2 class="my-5">Assigned Slot</h2>
-      <p class="display-1" style="color:black">{{recommendSlot.id}}</p>
-      <button class="btn btn-warning" >Get Ticket</button>
+      <p class="display-1" style="color:black">{{rec[0].id}}</p>
+      <button class="btn btn-warning" @click="getTicket">Get Ticket</button>
     </div>
   </div>
 </template>
 <script>
-//import { rdb } from "../firebase";
+import { rdb } from "../firebase";
 export default {
   data() {
     return {
@@ -16,35 +16,36 @@ export default {
     };
   },
   mounted() {
-    this.rec = JSON.parse(this.$store.getters.firstSlotOut);
+    this.rec = JSON.parse(this.$store.getters.firstSlotOut)
   },
   computed: {
     recommendSlot() {
+      //console.log(JSON.parse(this.rec))
+      console.log((JSON.parse(this.$store.getters.firstSlotOut)))
       let t = JSON.parse(this.$store.getters.firstSlotOut);
 
       if (this.$store.getters.firstSlotOut == '"') {
         return "Parking Full";
-      } else return t[0];
+      } else {
+        return t[0];
+      }
     }
   },
   methods: {
-    // getTicket() {
-    //   alert(this.recommendSlot);
-    // }
-    /**
-     *  
-     *  let slotSelect = [this.$store.state.slotSelect[0]].toString();
-      if (slotSelect !== null) {
-        if (this.bestSlot === "accepted") {
-          let setBsetToFirebase = rdb
-            .ref("/bestSlot")
-            .child(slotSelect)
-            .set("true")
-            .then(() => console.log("set best Success"));
-        }
-      }
-     * 
-     */
+    getTicket() {
+      //   alert(this.recommendSlot);
+      // }
+      let assignSpot = this.recommendSlot.id;
+      let ticketToFirebase = rdb
+        .ref("/sensor")
+        .child(assignSpot)
+        .set(true)
+        .then(() => console.log("set best Success"))
+        .catch(err => console.log(err))
+        .then(()=>{
+          alert(this.recommendSlot.id+" to firebase success")
+        })
+    }
   }
 };
 </script>

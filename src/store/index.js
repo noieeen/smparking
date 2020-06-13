@@ -7,13 +7,13 @@ let currentFloor = window.localStorage.getItem('floor');
 
 let slotSelect = window.localStorage.getItem('slotSelect');
 
-let showRecommendSlot = window.localStorage.getItem('showRecommendSlot');
+let showAssignSlot = window.localStorage.getItem('showRecommendSlot');
 
 export default new Vuex.Store({
   state: {
     floor: currentFloor,   
     slotSelect:slotSelect,
-    showRecommendSlot:showRecommendSlot//['1A-01','1D-04'] 
+    showRecommendSlot:showAssignSlot//['1A-01','1D-04'] 
   },
   mutations: {
     changeFloor(state, floor) {
