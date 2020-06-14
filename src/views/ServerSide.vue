@@ -231,10 +231,9 @@ export default {
     getZoneWithSlot() {
       let marticSlot = [];
       let countZone = 0;
-    
-    
+
       let postiX = 0;
-    
+
       let positY = 0;
       let posZoneChange = 0;
       //let arrAllZone = new Map();
@@ -349,8 +348,6 @@ export default {
                   );
                   if (foundStatus) {
                     status = "busy";
-                  } else {
-                    stateBestArr.push({ id: doc.id, value: min });
                   }
                   if (foundBest) {
                     status = "best";
@@ -360,12 +357,22 @@ export default {
                   }
 
                   arrayzone.push([doc.id, min, status]);
+
+
+                  /**set sensor RDB */
+                  if (!foundStatus) {
+                    let j = rdb
+                      .ref("sensor/" + doc.id)
+                      .set({ status: true, value: min })
+                      console.log(doc.id+' is new ceate')
+                  }
+
                   //arrayzone.push([doc.id,doc.data().status,doc.data().bestSlot,busy])
                   /** */
                   this.allSlot[Symbol.iterator] = function*() {
                     yield* [...this.entries()].sort((a, b) => a[1] - b[1]);
                   };
-               
+
                   // sort by value
                   stateBestArr.sort(function(a, b) {
                     return a.value - b.value;
@@ -375,8 +382,8 @@ export default {
                   //   return a - b;
                   // });
                   console.log([...this.allSlot]);
-                 
-                  console.log("stateBestArr", stateBestArr);
+
+                  //console.log("stateBestArr", ...stateBestArr);
                   // let a = ['1A-00','2A-00']
                   //this.$store.commit("recommendSlot", a); //stateBestArr
 
@@ -400,7 +407,6 @@ export default {
                   //arrClosest.forEach((element)=>console.log('testForEach',element[0],'X=', element[1][0],'Y=', element[1][1]))
                   //console.log("arrClosest", arrClosest[i][0]);
                   if (arrayzone.length === 2) {
-                
                     arrayChunked.push(arrayzone);
                     arrayzone = [];
                   }
@@ -413,7 +419,6 @@ export default {
                 /** */
                 if (this.all_zones.size > countZone) {
                   //marticSlot.push(countZone);
-              
                 }
                 countZone = this.all_zones.size;
                 // console.log("marticSlot", this.all_zones.size, marticSlot);
@@ -423,13 +428,10 @@ export default {
                   this.isShow = true;
                   console.log("All_Zone", this.all_zones);
                 }
-                // --->> this.$store.commit("showRecommendSlot", stateBestArr);
+                // --->>  this.$store.commit("showRecommendSlot", stateBestArr);
               });
-             
           });
-           
         });
-
     },
 
     test2() {
