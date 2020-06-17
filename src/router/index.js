@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Config from '../views/Config.vue'
 import ServerSide from '../views/ServerSide.vue'
 import Recommend from '../views/ShowRecommend.vue'
+import StatusList from '../views/StatusList.vue'
 
 // import { fb } from "..firebase";
 //require("firebase/auth");
@@ -24,6 +25,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue")
+  },
+  {
+    path: "/statuslist",
+    name: "list",
+    component: StatusList
   },
   {
     path: '/config',

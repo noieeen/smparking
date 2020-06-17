@@ -121,7 +121,8 @@
                     @click="$bvModal.show('slotModall'),infoSpot(item)"
                     title="Slot setting"
                   >
-                    <div v-if="item[2] === 'busy'" class="full" style="color:white">{{item[0]}}</div>
+                  <!-- style="color:white" -->
+                    <div v-if="item[2] === 'busy'" class="full" >{{item[0]}}</div>
                     <div v-else-if="item[2] === 'best'" class="best" style="color:white">{{item[0]}}</div>
                     <div v-else-if="item[2] === 'near'" class="near">{{item[0]}}</div>
                     <div v-else-if="item[2] === 'empty'" class="empty">{{item[0]}}</div>

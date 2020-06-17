@@ -4,14 +4,14 @@
       <h2 class="my-5">Assigned Slot</h2>
       <p class="display-1" style="color:black">{{nowAssign}}</p>
       <button class="btn btn-warning" @click="getTicket(nowAssign)">Get Ticket</button>
-      <p class="mt-4">Busy Slot</p>
+      <!-- <p class="mt-4">Busy Slot</p>
       <ul class="list-unstyled">
         <li class="pointer" v-for="(i,key) in slotStatus" :key="key">
           {{key}}>>{{i}}
           <i v-if="i.status == true" class="fas fa-parking icon-empty mx-2"></i>
           <i v-else-if="i.status == false" class="fas fa-parking icon-full mx-2"></i>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </template>
@@ -30,6 +30,9 @@ export default {
       assignVal: new Map(),
       nowAssign: null
     };
+  },
+  created:()=>{
+    this.recommendSlot();
   },
   mounted() {
     //this.rec = JSON.parse(this.$store.getters.firstSlotOut);

@@ -42,6 +42,10 @@
             title="Gennerate Parking"
           >Gennerate</a>
           </li>
+          <li class="nav-item">
+            <router-link to="/statuslist" href="#" class="nav-link">List view</router-link >
+          </li>
+  
         </ul>
       </div>
     </nav>
