@@ -17,39 +17,40 @@
           <li class="nav-item">
             <a href="#" class="nav-link">Admin</a>
           </li>
-  
+
           <li class="nav-item">
             <!-- <a href="#" class="nav-link" @click="setting">Setting</a> -->
-          <a
-            class="nav-link btn btn-info mx-2"
-            style="color:white;"
-            type="button"
-            data-toggle="modal"
-            data-target="#editFloor"
-            @click="$bvModal.show('editFloorr')"
-            title="Edit Current Floor"
-          >Edit</a>
+            <a
+              class="nav-link btn btn-info mx-2"
+              style="color:white;"
+              type="button"
+              data-toggle="modal"
+              data-target="#editFloor"
+              @click="$bvModal.show('editFloorr')"
+              title="Edit Current Floor"
+            >Edit</a>
           </li>
           <li class="nav-item">
             <!-- <a href="#" class="nav-link" @click="setting">Setting</a> -->
-          <a
-            class="nav-link btn btn-success mx-2"
-            style="color:white;"
-            type="button"
-            data-toggle="modal"
-            data-target="#initParking"
-            @click="$bvModal.show('initParkingg')"
-            title="Gennerate Parking"
-          >Gennerate</a>
+            <a
+              class="nav-link btn btn-success mx-2"
+              style="color:white;"
+              type="button"
+              data-toggle="modal"
+              data-target="#initParking"
+              @click="$bvModal.show('initParkingg')"
+              title="Gennerate Parking"
+            >Gennerate</a>
           </li>
           <li class="nav-item">
-            <router-link to="/statuslist" href="#" class="nav-link">List view</router-link >
+            <router-link to="/statuslist" class="nav-link">List view</router-link>
           </li>
-  
+          <li class="nav-item">
+            <router-link to="/recommend" class="nav-link">Assign Page</router-link>
+          </li>
         </ul>
       </div>
     </nav>
-    
   </div>
 </template>
 <script>
@@ -57,7 +58,7 @@ export default {
   name: "Navbar",
   methods: {
     // setting(){
-    //   // this.$mount 
+    //   // this.$mount
     //   console.log('work')
     //   this.$bvModal.show('initParking')
     // }
@@ -66,7 +67,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./src/assets/navbar.scss";
-.navbar{
+.navbar {
   z-index: 1;
 }
 </style>

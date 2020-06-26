@@ -1,10 +1,14 @@
 <template>
   <div class="container-fulid h-100">
-    <div class="container pt-3">
-        <router-link to="/recommend">Assign Page</router-link>
+    <div id="logo-background">
+      <p class="logo">SM</p>
+    </div>
+    <div class="container pt-3" style="z-index:1;">
+      <router-link to="/recommend">Go to Assign Page</router-link>
       <p class="h1 mt-5">SMparking</p>
-      <table class="table table-hover">
-        <thead>
+
+      <table class="table table-hover mt-3">
+        <thead class="thead-dark">
           <tr>
             <th scope="col">#Sensor ID</th>
             <th scope="col">Status</th>
@@ -13,8 +17,12 @@
         <tbody>
           <tr v-for="(i,key) in slotStatus" :key="key">
             <th scope="row">{{key}}</th>
-            <td colspan="2" v-if="i.status == true" class="fas fa-parking icon-empty mx-2"></td>
-            <td v-else-if="i.status == false" class="fas fa-parking icon-full mx-2"></td>
+            <td colspan="2" v-if="i.status == true" class="mx-2 text-left">
+              <i class="fas fa-parking mr-2 icon-empty"></i>Aviliable
+            </td>
+            <td colspan="2" v-else-if="i.status == false" class="mx-2 text-left">
+              <i class="fas fa-parking icon-full mr-2"></i>Busy
+            </td>
           </tr>
         </tbody>
       </table>
@@ -31,8 +39,8 @@ export default {
       rec: null,
       arrSensor: null,
       slotStatus: null,
-      bestStatus:null,
-      bestStatusKey:null,
+      bestStatus: null,
+      bestStatusKey: null,
       //slotStatusKey: null,
       sortPriority: new Map(),
       assignVal: new Map(),
@@ -45,7 +53,7 @@ export default {
       //this.slotStatusKey = snapshot.key;
       this.slotStatus = snapshot.val();
     });
-       bestFromRdbRef.on("value", snapshot => {
+    bestFromRdbRef.on("value", snapshot => {
       this.bestStatus = snapshot.val();
       this.bestStatusKey = snapshot.key;
     });
@@ -70,3 +78,36 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=IBM+Plex+Sans:ital,wght@1,600&family=Monoton&display=swap");
+
+.container-fulid {
+  background-color: white;
+}
+.logo {
+  //font-family: 'IBM Plex Sans', sans-serif;
+  // font-family: "Bungee Shade", cursive;
+  font-family: "Monoton", cursive;
+  color: #d8d8d8;
+}
+#logo-background {
+  left: 68%;
+  top: 48%;
+  font-size: 21rem;
+  position: fixed;
+  font-weight: 400;
+  opacity: 50%;
+  z-index: 0;
+}
+#logo-background :hover {
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none;
+}
+</style>

@@ -230,6 +230,7 @@ export default {
   },
   methods: {
     getZoneWithSlot() {
+     
       let marticSlot = [];
       let countZone = 0;
 
@@ -334,6 +335,16 @@ export default {
                     slot => slot == doc.id //&& Object.values(this.slotStatus) === true
                   );
 
+                  let getStatsRdb = this.slotStatus
+                  //if(getStatsRdb[])
+                  // for(let i in getStatsRdb){
+                  //   if(getStatsRdb[i] == true){
+
+                  //   }else if(getStatsRdb[i] == false){
+
+                  //   }
+                  // }
+
                   /** 
                        const inventory = [
                         {name: 'apples', quantity: 2},
@@ -433,6 +444,7 @@ export default {
               });
           });
         });
+        
     },
 
     test2() {
