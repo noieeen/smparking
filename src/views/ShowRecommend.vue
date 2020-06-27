@@ -5,14 +5,14 @@
       <div v-if="!isShow" class="row justify-content-center">
         <EllipsisLoader :color="'#aebfbe'" />
       </div>
-      <div>
-        <p class="display-1" style="color:black">{{recommendSlot}}</p>
+      <div >
+        <p class="display-1" style="color:black">{{recommendSlot[0]}}</p>
       </div>
 
-      <button class="btn btn-warning m-3" @click="getTicket(nowAssign)">Get Ticket</button>
+      <button class="btn btn-warning m-3" @click="getTicket(recommendSlot[0])">Get Ticket</button>
       <!-- <p class="mt-4">Busy Slot</p>
       <ul class="list-unstyled">
-        <li class="pointer" v-for="(i,key) in slotStatus" :key="key">
+        <li class="pointer" v-for="(i,key) in assignVal" :key="key">
           {{key}}>>{{i}}
           <i v-if="i.status == true" class="fas fa-parking icon-empty mx-2"></i>
           <i v-else-if="i.status == false" class="fas fa-parking icon-full mx-2"></i>
@@ -61,24 +61,31 @@ export default {
   },
   computed: {
     recommendSlot() {
-      let fb = this.slotStatus;
-      for (let i in fb) {
-        if (fb[i].status == true) {
-          this.assignVal.set(i, fb[i].value);
+      if (this.refreshAssign == false) {
+        let fb = this.slotStatus;
+        for (let i in fb) {
+          if (fb[i].status == true) {
+            this.assignVal.set(i, fb[i].value);
+          }
         }
+        this.assignVal[Symbol.iterator] = function*() {
+          yield* [...this.entries()].sort((a, b) => a[1] - b[1]);
+        };
+        //console.log(typeof this.slotStatus, this.slotStatus);
+        //console.log("MAP", this.assignVal.keys().next().value);
+        this.nowAssign = this.assignVal.keys().next().value;
+        //console.log("this.nowAssign", this.nowAssign);
+        let arr = Array.from(this.assignVal);
+        let find = arr.find(x => x[0]);
+        console.log("assignVal", find);
+        // if (this.assignVal.keys().next().value != null) {
+        this.isShow = true;
+        // }
+        console.log("isShow", this.isShow);
+
+        return find; //this.nowAssign//this.assignVal.keys().next().value;
       }
-      this.assignVal[Symbol.iterator] = function*() {
-        yield* [...this.entries()].sort((a, b) => a[1] - b[1]);
-      };
-      //console.log(typeof this.slotStatus, this.slotStatus);
-      //console.log("MAP", this.assignVal.keys().next().value);
-      this.nowAssign = this.assignVal.keys().next().value;
-      console.log("this.nowAssign", this.nowAssign);
-      // if (this.assignVal.keys().next().value != null) {
-      this.isShow = true;
-      // }
-      console.log("isShow", this.isShow);
-      return this.assignVal.keys().next().value;
+      this.refreshAssign = true;
     }
   },
   methods: {
@@ -92,7 +99,8 @@ export default {
           })
           .then(() => {
             this.update();
-            this.recommendSlot;
+            this.refreshAssign = false;
+            
           });
       } else {
         alert("Can not Assign");
@@ -102,7 +110,7 @@ export default {
       slotStatusRef.on("value", snapshot => {
         this.slotStatus = snapshot.val();
         console.log("update");
-        //this.recommendSlot();
+        console.log("refreshAssign", this.refreshAssign);
       });
     }
   },

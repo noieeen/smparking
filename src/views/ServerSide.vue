@@ -121,8 +121,8 @@
                     @click="$bvModal.show('slotModall'),infoSpot(item)"
                     title="Slot setting"
                   >
-                  <!-- style="color:white" -->
-                    <div v-if="item[2] === 'busy'" class="full" >{{item[0]}}</div>
+                    <!-- style="color:white" -->
+                    <div v-if="item[2] === 'busy'" class="full">{{item[0]}}</div>
                     <div v-else-if="item[2] === 'best'" class="best" style="color:white">{{item[0]}}</div>
                     <div v-else-if="item[2] === 'near'" class="near">{{item[0]}}</div>
                     <div v-else-if="item[2] === 'empty'" class="empty">{{item[0]}}</div>
@@ -188,7 +188,8 @@ export default {
       bestStatus: {},
       bestStatusKey: null,
       allSlot: new Map(),
-      arrSlotStatus: []
+      arrSlotStatus: [],
+      idAndStatue: []
     };
   },
   // firestore() {
@@ -230,7 +231,6 @@ export default {
   },
   methods: {
     getZoneWithSlot() {
-     
       let marticSlot = [];
       let countZone = 0;
 
@@ -335,7 +335,15 @@ export default {
                     slot => slot == doc.id //&& Object.values(this.slotStatus) === true
                   );
 
-                  let getStatsRdb = this.slotStatus
+                  // let getStatsRdb = Object.keys(this.slotStatus).filter(
+                  //   slot => this.slotStatus[doc.id].status == false
+                  // )//.map(slot => this.slotStatus[doc.id]);
+                  console.log("yyy", doc.id, this.slotStatus[doc.id].status);
+                  if (this.slotStatus[doc.id].status == true) {
+status = "empty"
+                  } else if (this.slotStatus[doc.id].status == false) {
+status = "busy"
+                  }
                   //if(getStatsRdb[])
                   // for(let i in getStatsRdb){
                   //   if(getStatsRdb[i] == true){
@@ -358,9 +366,9 @@ export default {
                   foundBest = Object.keys(this.bestStatus).find(
                     slot => slot == doc.id
                   );
-                  if (foundStatus) {
-                    status = "busy";
-                  }
+                  // if (foundStatus) {
+                  //   status = "busy";
+                  // }
                   if (foundBest) {
                     status = "best";
                   }
@@ -370,13 +378,12 @@ export default {
 
                   arrayzone.push([doc.id, min, status]);
 
-
                   /**set sensor RDB */
                   if (!foundStatus) {
                     let j = rdb
                       .ref("sensor/" + doc.id)
-                      .set({ status: true, value: min })
-                      console.log(doc.id+' is new ceate')
+                      .set({ status: true, value: min });
+                    console.log(doc.id + " is new ceate");
                   }
 
                   //arrayzone.push([doc.id,doc.data().status,doc.data().bestSlot,busy])
@@ -444,7 +451,6 @@ export default {
               });
           });
         });
-        
     },
 
     test2() {
