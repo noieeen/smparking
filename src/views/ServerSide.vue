@@ -47,7 +47,7 @@
         </b-nav>
       </div>-->
 
-      <div>
+      <!-- <div>
         <ul v-for="(index,keyy) in slotStatus.floor" :key="keyy" class="text-left">
           <li v-for="(indexx,key) in index" :key="key">floor:{{keyy}} {{index}}</li>
         </ul>
@@ -66,7 +66,7 @@
       </div>
 
       <button class="btn btn-info my-5" @click="test">test</button>
-      <button class="btn btn-danger my-5 mx-5" @click="test2">test2</button>
+      <button class="btn btn-danger my-5 mx-5" @click="test2">test2</button> -->
 
       <!-- <div class="border m-4">
               <div class="btn btn-primary m-2">primary</div>
@@ -89,14 +89,14 @@
       <!-- border border-primary p-5 -->
 
       <div v-if="isShow" class="parking">
-        <div class="row border border-danger">
+        <div class="row ">
           <div class="col-3" v-for="(i,zone) in all_zones" :key="zone">
             <table class="table">
               <tr>
-                <th :colspan="2" @click="zoneSelect(i)">
+                <th :colspan="2">
                   <div class="d-inline-flex align-items-center my-auto">
-                    <span @click="zoneSelect(i)">Zone {{i[0]}}</span>
-                    <div class="box ml-2 yellow-striped" v-if="i.entrance == true"></div>
+                    <span >Zone {{i[0]}}</span>
+                    <!-- <div class="box ml-2 yellow-striped" v-if="i.entrance == true"></div> -->
                   </div>
                 </th>
               </tr>
@@ -340,9 +340,9 @@ export default {
                   // )//.map(slot => this.slotStatus[doc.id]);
                   console.log("yyy", doc.id, this.slotStatus[doc.id].status);
                   if (this.slotStatus[doc.id].status == true) {
-status = "empty"
+                    status = "empty";
                   } else if (this.slotStatus[doc.id].status == false) {
-status = "busy"
+                    status = "busy";
                   }
                   //if(getStatsRdb[])
                   // for(let i in getStatsRdb){

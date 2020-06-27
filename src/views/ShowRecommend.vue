@@ -1,11 +1,18 @@
 <template>
   <div class="container-fulid h-100">
+    <div id="logo-background">
+      <p class="logo">SM</p>
+      <p class="parking-logo">Parking</p>
+    </div>
     <div class="jusify-content-center align-items-center">
+      <div class="text-right mr-4">
+        <router-link to="/config">Back to Config Page</router-link>
+      </div>
       <p class="h1 my-5">Assigned Slot</p>
       <div v-if="!isShow" class="row justify-content-center">
         <EllipsisLoader :color="'#aebfbe'" />
       </div>
-      <div >
+      <div>
         <p class="display-1" style="color:black">{{recommendSlot[0]}}</p>
       </div>
 
@@ -100,7 +107,6 @@ export default {
           .then(() => {
             this.update();
             this.refreshAssign = false;
-            
           });
       } else {
         alert("Can not Assign");
@@ -137,14 +143,51 @@ export default {
 .pointer {
   cursor: default;
 }
+// .container-fulid {
+//   background-color: #dce7e7;
+// }
+// html,
+// body {
+//   margin: 0;
+//   padding: 0;
+//   background-color: #dce7e7;
+// }
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=IBM+Plex+Sans:ital,wght@1,600&family=Monoton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Galada&display=swap");
 .container-fulid {
-  background-color: #dce7e7;
+  background-color: white;
 }
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #dce7e7;
+.logo {
+  //font-family: 'IBM Plex Sans', sans-serif;
+  // font-family: "Bungee Shade", cursive;
+  font-family: "Monoton", cursive;
+  color: #d8d8d8;
+  font-weight: 400;
+  font-size: 21rem;
+  //margin: 0;
+}
+.parking-logo {
+  font-family: "Galada", cursive;
+  color: #9e9e9e;
+  font-size: 10rem;
+  //margin: 0;
+}
+#logo-background {
+  left: 0%;
+  top: 0%;
+  position: fixed;
+  opacity: 50%;
+  z-index: -1;
+}
+#logo-background :hover {
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-decoration: none;
 }
 </style>
-

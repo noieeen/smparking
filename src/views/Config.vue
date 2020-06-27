@@ -1,18 +1,13 @@
 <template>
   <div class="config">
     <div class="page-wrapper d-flex align-items-stretch">
-
-
       <div class="container-fluid">
         <!-- <initParking></initParking> -->
 
         <div class="page-content p-4 p-md-5 pt-5">
           <Navbar />
 
-<button class="btn btn-success" @click="test">test config</button>
-
-          <div class="bg-light">
-
+          <div class="bg-light mt-5">
             <!-- <h1 class="display-2">Config</h1> -->
             <page-number></page-number>
             <main class="page-content pt-2">
@@ -31,62 +26,13 @@
                         ></b-pagination-nav>
                       </div>
                       <div>
-                        <!-- <b-form inline class="mx-2">
-                          <b-row>
-                            <b-col sm="2">
-                              <b-form-input
-                                id="goFloor"
-                                v-model="goFloor"
-                                class="mb-2 mr-sm-2 mb-sm-0 text-center"
-                                type="number"
-                                min="1"
-                                max="100"                                
-                                :placeholder="[[currentPage]]"
-                              ></b-form-input>
-                            </b-col>
-                          </b-row>
-                          <b-button type="submit" pill variant="info">Go</b-button>
-                        </b-form> -->
-                      <!-- <p class="mx-3">Current Page: {{ currentPage }}</p> -->
-                      
-                    </div>
+                       
+                      </div>
                     </div>
                   </nav>
-
                 </section>
               </div>
             </main>
-
-            <!-- <div class="row">
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-header">Zone A</div>
-                  <div class="card-body ">
-                    <ul class="spot-list spot-list-vertical p-0 my-1 mx-0">
-                      
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      
-                     
-                    </ul>
-                    <ul class="spot-list spot-list-vertical p-0 my-1 mx-0">
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      <a href="spot"><li class="spot"></li></a>
-                      
-                    </ul>
-                      
-                  </div>
-                </div>
-              </div>
-            </div>-->
-
-            <!-- <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" first-number></b-pagination> -->
           </div>
         </div>
       </div>
@@ -112,7 +58,7 @@ import { db } from "../firebase";
 export default {
   components: {
     Navbar,
- 
+
     PageNavi,
     InitParking,
     EditFloor,
@@ -120,7 +66,7 @@ export default {
     PageNumber
   },
 
-   data() {
+  data() {
     return {
       floors: [],
       /** Change row pageNavi here */
@@ -132,7 +78,7 @@ export default {
   },
   firestore() {
     return {
-      floors: db.collection("floors"),
+      floors: db.collection("floors")
     };
   },
   // data() {
