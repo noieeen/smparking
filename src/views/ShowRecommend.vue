@@ -15,7 +15,10 @@
       <div>
         <p class="display-1" style="color:black">{{recommendSlot[0]}}</p>
       </div>
-
+<button class="btn btn-primary" @click="forceRe" >
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Refresh...
+</button>
       <button class="btn btn-warning m-3" @click="getTicket(recommendSlot[0])">Get Ticket</button>
       <!-- <p class="mt-4">Busy Slot</p>
       <ul class="list-unstyled">
@@ -32,6 +35,7 @@
 import { rdb } from "../firebase";
 import EllipsisLoader from "@bit/joshk.vue-spinners-css.ellipsis-loader";
 let slotStatusRef = rdb.ref("/sensor");
+let sensorRef = rdb.ref("/sensorr");
 let bestFromRdbRef = rdb.ref("/bestSlot");
 export default {
   components: {
@@ -65,6 +69,9 @@ export default {
       this.slotStatus = snapshot.val();
     });
     this.recommendSlot;
+    sensorRef.on("child_changed", snapshot => {
+      console.log('sensorRef',snapshot.val()) 
+    });
   },
   computed: {
     recommendSlot() {
@@ -117,8 +124,13 @@ export default {
         this.slotStatus = snapshot.val();
         console.log("update");
         console.log("refreshAssign", this.refreshAssign);
+        this.recommendSlot;
       });
-    }
+    },
+    forceRe(){
+      /**Refresh page */
+      this.$router.go(0);
+    },
   },
   watch: {
     re() {

@@ -12,16 +12,29 @@
           <tr>
             <th scope="col">#Sensor ID</th>
             <th scope="col">Status</th>
+            <th scope="col">Switch</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(i,key) in slotStatus" :key="key">
             <th scope="row">{{key}}</th>
-            <td colspan="2" v-if="i.status == true" class="mx-2 text-left">
-              <i class="fas fa-parking mr-2 icon-empty"></i>Aviliable
+            <td colspan="1" v-if="i.status == true" class="text-left">
+              <i class="fas fa-parking mr-2 icon-empty mx-2"></i>Aviliable
             </td>
-            <td colspan="2" v-else-if="i.status == false" class="mx-2 text-left">
-              <i class="fas fa-parking icon-full mr-2"></i>Busy
+            <td colspan="1" v-else-if="i.status == false" class="text-left">
+              <i class="fas fa-parking icon-full mr-2 mx-2"></i>Busy
+            </td>
+            <td colspan="1">
+              <div class="mx-0">
+                <b-form-checkbox
+                  v-model="i.status"
+                  name="check-button"
+                  switch
+                  @change="statusChange(key,i.status)"
+                >
+                  <b>(Sensor: {{ i.status }})</b>
+                </b-form-checkbox>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -44,7 +57,8 @@ export default {
       //slotStatusKey: null,
       sortPriority: new Map(),
       assignVal: new Map(),
-      nowAssign: null
+      nowAssign: null,
+      checked: false
     };
   },
   mounted() {
@@ -74,6 +88,21 @@ export default {
       //console.log("MAP", this.assignVal.keys().next().value);
       this.nowAssign = this.assignVal.keys().next().value;
       return this.assignVal.keys().next().value;
+    },
+    statusChange(sensorId, status) {
+      let slotSelect = sensorId;
+      console.log(sensorId, status);
+      let changeStatus = true;
+      if (status == false) {
+        changeStatus = true;
+      } else if (status == true) {
+        changeStatus = false;
+      }
+      let setBsetToFirebase = rdb
+        .ref("/sensor")
+        .child(slotSelect + "/status")
+        .set(changeStatus)
+        .then(() => console.log("set " + slotSelect + " " + status));
     }
   }
 };

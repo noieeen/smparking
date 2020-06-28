@@ -338,7 +338,7 @@ export default {
                   // let getStatsRdb = Object.keys(this.slotStatus).filter(
                   //   slot => this.slotStatus[doc.id].status == false
                   // )//.map(slot => this.slotStatus[doc.id]);
-                  console.log("yyy", doc.id, this.slotStatus[doc.id].status);
+                  //console.log("yyy", doc.id, this.slotStatus[doc.id].status);
                   if (this.slotStatus[doc.id].status == true) {
                     status = "empty";
                   } else if (this.slotStatus[doc.id].status == false) {
